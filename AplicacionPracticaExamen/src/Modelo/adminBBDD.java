@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -78,6 +79,41 @@ public class adminBBDD {
 		}
 
 	}
+	
+	
+	// TABLA PRINCIPAL
+		public void insertarTabla() {
+			try {
+				Statement stmt;
+				if (conexion != null) {
+					stmt = conexion.createStatement();
+					ResultSet rset = stmt
+							.executeQuery("Select codigoEquipo, tipo, marca, modelo, departamento, tipoUso, prestable, estado ,ubicacion,comentarios from equipos where estado <> 'Descatalogado'; ");
+					while (rset.next()) {
+						int codigoEquipo = rset.getInt("codigoEquipo");
+						String tipo = rset.getString("tipo");
+						String marca = rset.getString("marca");
+						String modelo = rset.getString("modelo");
+						String departamento = rset.getString("departamento");
+						String tipoUso = rset.getString("tipoUso");
+						String prestable = rset.getString("prestable");
+						String estado = rset.getString("estado");
+						
+
+						cPrincipal.introducirTabla(codigoEquipo, tipo, marca,
+								modelo, departamento, tipoUso, prestable, estado);
+					}
+					stmt.close();
+					rset.close();
+				} else {
+					System.out.println("conexion Nula");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	
 	public void salir() {
 		System.exit(0);

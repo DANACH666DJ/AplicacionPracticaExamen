@@ -56,37 +56,28 @@ public class V_Principal extends JFrame {
 		setContentPane(contentPane);
 		
 		btnUsuar = new JButton("Usuarios");
-		btnUsuar.setBounds(22, 24, 148, 23);
 		btnUsuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
 		btnDescat = new JButton("Descatalogados");
-		btnDescat.setBounds(188, 24, 146, 23);
 		
 		btnPrest = new JButton("Prestamos");
-		btnPrest.setBounds(352, 24, 159, 23);
 		
 		btnLog = new JButton("Log");
-		btnLog.setBounds(529, 24, 146, 23);
 		
 		btnBusq = new JButton("Busqueda");
-		btnBusq.setBounds(131, 78, 561, 31);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(135, 127, 557, 370);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JLabel lblAdmin = new JLabel("Admin");
-		lblAdmin.setBounds(39, 150, 29, 14);
 		
 		JLabel lblNombreusuario = new JLabel("NombreUsuario");
-		lblNombreusuario.setBounds(22, 182, 73, 14);
 		
 		btnLogOut = new JButton("Log Out");
-		btnLogOut.setBounds(15, 459, 71, 23);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -107,22 +98,25 @@ public class V_Principal extends JFrame {
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(10)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(20)
-					.addComponent(btnNuevoEquip, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-					.addGap(83)
-					.addComponent(btnModifEquip, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-					.addGap(82)
-					.addComponent(btnEliminEquip, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(20)
+							.addComponent(btnNuevoEquip, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+							.addGap(83)
+							.addComponent(btnModifEquip, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+							.addGap(82)
+							.addComponent(btnEliminEquip, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(11)
+					.addGap(18)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(2)
@@ -131,20 +125,8 @@ public class V_Principal extends JFrame {
 						.addComponent(btnEliminEquip)))
 		);
 		panel.setLayout(gl_panel);
-		contentPane.setLayout(null);
-		contentPane.add(btnBusq);
-		contentPane.add(lblNombreusuario);
-		contentPane.add(lblAdmin);
-		contentPane.add(panel);
-		contentPane.add(btnUsuar);
-		contentPane.add(btnDescat);
-		contentPane.add(btnPrest);
-		contentPane.add(btnLog);
-		contentPane.add(btnLogOut);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(15, 207, 103, 234);
-		contentPane.add(scrollPane_1);
 		
 		table_1 = new JTable();
 		table_1.setModel(new DefaultTableModel(
@@ -158,6 +140,60 @@ public class V_Principal extends JFrame {
 			}
 		));
 		scrollPane_1.setViewportView(table_1);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(17)
+					.addComponent(btnUsuar, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnDescat, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnPrest, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnLog, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(126)
+					.addComponent(btnBusq, GroupLayout.PREFERRED_SIZE, 561, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(24)
+							.addComponent(lblAdmin))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(7)
+							.addComponent(lblNombreusuario))
+						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnLogOut))
+					.addGap(17)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 557, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(19)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnUsuar)
+						.addComponent(btnDescat)
+						.addComponent(btnPrest)
+						.addComponent(btnLog))
+					.addGap(31)
+					.addComponent(btnBusq, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(23)
+							.addComponent(lblAdmin)
+							.addGap(18)
+							.addComponent(lblNombreusuario)
+							.addGap(11)
+							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnLogOut))
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 	public void setCPrincipal(C_Principal cPrincipal) {
 		this.cPrincipal = cPrincipal;
@@ -167,6 +203,25 @@ public class V_Principal extends JFrame {
 	}
 	public void setLogin(V_Login login) {
 		this.login = login;
+	}
+	public void IntroducirTablaPrincipal(int codigoEquipo, String tipo, String marca,
+			String modelo, String departamento, String tipoUso,
+			String prestable, String estado){
+		int numCols = table_1.getModel().getColumnCount();
+		Object[] fila = new Object[numCols];
+		fila[0] = codigoEquipo;
+		fila[1] = tipo;
+		fila[2] = marca;
+		fila[3] = modelo;
+		fila[4] = departamento;
+		fila[5] = tipoUso;
+		fila[6] = prestable;
+		fila[7] = estado;
+		((DefaultTableModel) table_1.getModel()).addRow(fila);
+		
+		
+		
+		
 	}
 	
 

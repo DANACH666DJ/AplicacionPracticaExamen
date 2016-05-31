@@ -49,6 +49,11 @@ public class Main {
 			vLogin.setVisible(true);
 			
 			
+			//Introducción de tablas
+			bbdda.insertarTabla();
+			
+			
+			
 		}
 
 	
