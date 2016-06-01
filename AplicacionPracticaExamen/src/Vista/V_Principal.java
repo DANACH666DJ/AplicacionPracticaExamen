@@ -37,6 +37,7 @@ public class V_Principal extends JFrame {
 	private JButton btnPrest;
 	private JButton btnLog;
 	private V_Login login;
+	private DefaultTableModel dtm;
 	
 	public C_Principal cPrincipal;
 	public adminBBDD bbdda;
@@ -80,13 +81,14 @@ public class V_Principal extends JFrame {
 		btnLogOut = new JButton("Log Out");
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		dtm = (new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"IdEquipo", "Tipo", "Marca", "Modelo", "Departamento", "TipoUso", "Prestable", "Estado"
 			}
 		));
+		table.setModel(dtm);
 		scrollPane.setViewportView(table);
 		
 		btnNuevoEquip = new JButton("Nuevo Equipo");
@@ -207,7 +209,7 @@ public class V_Principal extends JFrame {
 	public void IntroducirTablaPrincipal(int codigoEquipo, String tipo, String marca,
 			String modelo, String departamento, String tipoUso,
 			String prestable, String estado){
-		int numCols = table_1.getModel().getColumnCount();
+		int numCols = table.getModel().getColumnCount();
 		Object[] fila = new Object[numCols];
 		fila[0] = codigoEquipo;
 		fila[1] = tipo;
@@ -217,7 +219,7 @@ public class V_Principal extends JFrame {
 		fila[5] = tipoUso;
 		fila[6] = prestable;
 		fila[7] = estado;
-		((DefaultTableModel) table_1.getModel()).addRow(fila);
+		((DefaultTableModel) table.getModel()).addRow(fila);
 		
 		
 		

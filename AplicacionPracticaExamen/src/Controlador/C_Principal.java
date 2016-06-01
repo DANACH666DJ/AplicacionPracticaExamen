@@ -26,10 +26,7 @@ public class C_Principal {
 		
 		
 	}
-	public void actualizarTabla() {
-		// TODO Auto-generated method stub
-		bbdda.insertarTabla();
-	}
+
 	
 
 }

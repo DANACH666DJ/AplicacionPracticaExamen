@@ -88,7 +88,7 @@ public class adminBBDD {
 				if (conexion != null) {
 					stmt = conexion.createStatement();
 					ResultSet rset = stmt
-							.executeQuery("Select codigoEquipo, tipo, marca, modelo, departamento, tipoUso, prestable, estado ,ubicacion,comentarios from equipos where estado <> 'Descatalogado'; ");
+							.executeQuery("Select codigoEquipo, tipo, marca, modelo, departamento, tipoUso, prestable, estado  from equipos where estado <> 'Descatalogado'; ");
 					while (rset.next()) {
 						int codigoEquipo = rset.getInt("codigoEquipo");
 						String tipo = rset.getString("tipo");
