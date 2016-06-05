@@ -37,6 +37,7 @@ public class V_Principal extends JFrame {
 	private JButton btnPrest;
 	private JButton btnLog;
 	private V_Login login;
+	private V_Descatalogados vDescatalogados;
 	private DefaultTableModel dtm;
 	
 	public C_Principal cPrincipal;
@@ -55,6 +56,8 @@ public class V_Principal extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
+		setResizable(false);
 		
 		btnUsuar = new JButton("Usuarios");
 		btnUsuar.addActionListener(new ActionListener() {
@@ -63,6 +66,12 @@ public class V_Principal extends JFrame {
 		});
 		
 		btnDescat = new JButton("Descatalogados");
+		btnDescat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				vDescatalogados.setVisible(true);
+			}
+		});
 		
 		btnPrest = new JButton("Prestamos");
 		
@@ -206,6 +215,9 @@ public class V_Principal extends JFrame {
 	public void setLogin(V_Login login) {
 		this.login = login;
 	}
+	public void setDescatalogados(V_Descatalogados vDescatalogados){
+		this.vDescatalogados=vDescatalogados;
+	}
 	public void IntroducirTablaPrincipal(int codigoEquipo, String tipo, String marca,
 			String modelo, String departamento, String tipoUso,
 			String prestable, String estado){
@@ -221,8 +233,7 @@ public class V_Principal extends JFrame {
 		fila[7] = estado;
 		((DefaultTableModel) table.getModel()).addRow(fila);
 		
-		
-		
+
 		
 	}
 	

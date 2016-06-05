@@ -42,6 +42,8 @@ public class V_Login extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
+		setResizable(false);	
 		
 		JLabel lblUser = new JLabel("User");
 		

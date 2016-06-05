@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.C_Descatalogados;
 import Controlador.C_Login;
 import Controlador.C_Principal;
 import Modelo.adminBBDD;
@@ -12,10 +13,12 @@ public class Main {
 		// VISTAS INICIO
 		V_Login vLogin;
 		V_Principal vPrincipal;
+		V_Descatalogados vDescatalogados;
 		
 		// CONTROLADORES INICIO
-		C_Login cLogin;
+	    C_Login cLogin;
 		C_Principal cPrincipal;
+		C_Descatalogados cDescatalogados;
 		
 		// MODELO INICIO
 		adminBBDD bbdda;
@@ -28,6 +31,8 @@ public class Main {
 			bbdda = new adminBBDD();
 			vPrincipal = new V_Principal();
 			cPrincipal = new C_Principal();
+			vDescatalogados=new V_Descatalogados();
+			cDescatalogados=new C_Descatalogados();
 			
 			
 			
@@ -44,6 +49,13 @@ public class Main {
 			cPrincipal.setVPrincipal(vPrincipal);
 			vPrincipal.setCPrincipal(cPrincipal);
 			vPrincipal.setLogin(vLogin);
+			vPrincipal.setDescatalogados(vDescatalogados);
+			
+			vDescatalogados.setPrincipal(vPrincipal);
+			vDescatalogados.setCDescatalogados(cDescatalogados);
+			cDescatalogados.setvDescatalogados(vDescatalogados);
+			cDescatalogados.setBbdda(bbdda);
+			bbdda.setCDescatalogados(cDescatalogados);
 			
 			
 			vLogin.setVisible(true);
@@ -51,6 +63,7 @@ public class Main {
 			
 			//Introducción de tablas
 			bbdda.insertarTabla();
+			bbdda.insertarTablaDescatalogados();
 			
 			
 			

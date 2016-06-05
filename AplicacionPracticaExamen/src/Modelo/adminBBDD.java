@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import Controlador.C_Login;
 import Controlador.C_Principal;
+import Controlador.C_Descatalogados;
 
 public class adminBBDD {
 	private Connection conexion;
@@ -20,6 +21,7 @@ public class adminBBDD {
 	
 	public C_Login cLogin;
 	public C_Principal cPrincipal;
+	public C_Descatalogados cDescatalogados;
 	
 	
 	public adminBBDD(){
@@ -114,6 +116,34 @@ public class adminBBDD {
 			}
 
 		}
+		
+		//Tabla Descatalogados
+		public void insertarTablaDescatalogados(){
+			try{
+				Statement stmt;
+				if(conexion!=null){
+					stmt=conexion.createStatement();
+					ResultSet rset =stmt.executeQuery("SELECT E.codigoEquipo,E.tipo,E.marca,E.modelo,B.fechaBaja,B.horaBaja FROM bajaequipos B,equipos E WHERE B.codigoEquipo=E.codigoEquipo;");
+					while(rset.next()){
+						int codigoEquipo=rset.getInt("codigoEquipo");
+						String tipo=rset.getString("tipo");
+						String marca=rset.getString("marca");
+						String modelo=rset.getString("modelo");
+						String fechaBaja=rset.getString("fechaBaja");
+						String horaBaja=rset.getString("horaBaja");
+		
+						cDescatalogados.introducirTablaDescatalogados(codigoEquipo, tipo, marca, modelo, fechaBaja, horaBaja);
+					}
+					stmt.close();
+					rset.close();
+				}else{
+					System.out.println("Conexión nula");
+				}
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
 	
 	public void salir() {
 		System.exit(0);
@@ -127,6 +157,9 @@ public class adminBBDD {
 
 	public void setCPrincipal(C_Principal cPrincipal) {
 		this.cPrincipal = cPrincipal;
+	}
+	public void setCDescatalogados(C_Descatalogados cDescatalogados){
+		this.cDescatalogados = cDescatalogados;
 	}
 	
 
