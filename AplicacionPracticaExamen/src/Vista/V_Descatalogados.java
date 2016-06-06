@@ -25,6 +25,7 @@ public class V_Descatalogados extends JFrame {
 	private JTable table;
 	private V_Principal vPrincipal;
 	private DefaultTableModel dtm;
+	private V_RegistroUsuario vRegistroUsuario;
 	
 	
 	public C_Descatalogados cDescatalogados;
@@ -55,6 +56,12 @@ public class V_Descatalogados extends JFrame {
 		});
 		
 		JButton btnUsuarios = new JButton("Usuarios");
+		btnUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				vRegistroUsuario.setVisible(true);
+			}
+		});
 		
 		JButton btnPrestamos = new JButton("Prestamos");
 		
@@ -108,6 +115,9 @@ public class V_Descatalogados extends JFrame {
 	public void setPrincipal (V_Principal VPrincipal){
 		this.vPrincipal = VPrincipal;
 	}
+	public void setvRegistroUsuario(V_RegistroUsuario vRegistroUsuario) {
+		this.vRegistroUsuario = vRegistroUsuario;
+	}
 	public void introducirTablaDescatalogados(int codigoEquipo, String tipo,
 			String marca, String modelo, String fechaBaja, String horaBaja) {
 		// TODO Auto-generated method stub
@@ -122,4 +132,6 @@ public class V_Descatalogados extends JFrame {
 		((DefaultTableModel) table.getModel()).addRow(fila);
 		
 	}
+	
+	
 }

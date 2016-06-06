@@ -39,6 +39,7 @@ public class V_Principal extends JFrame {
 	private V_Login login;
 	private V_Descatalogados vDescatalogados;
 	private DefaultTableModel dtm;
+	private V_RegistroUsuario vRegistroUsuario;
 	
 	public C_Principal cPrincipal;
 	public adminBBDD bbdda;
@@ -62,6 +63,8 @@ public class V_Principal extends JFrame {
 		btnUsuar = new JButton("Usuarios");
 		btnUsuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				vRegistroUsuario.setVisible(true);
 			}
 		});
 		
@@ -218,6 +221,9 @@ public class V_Principal extends JFrame {
 	public void setDescatalogados(V_Descatalogados vDescatalogados){
 		this.vDescatalogados=vDescatalogados;
 	}
+	public void setvRegistroUsuario(V_RegistroUsuario vRegistroUsuario) {
+		this.vRegistroUsuario = vRegistroUsuario;
+	}
 	public void IntroducirTablaPrincipal(int codigoEquipo, String tipo, String marca,
 			String modelo, String departamento, String tipoUso,
 			String prestable, String estado){
@@ -232,8 +238,6 @@ public class V_Principal extends JFrame {
 		fila[6] = prestable;
 		fila[7] = estado;
 		((DefaultTableModel) table.getModel()).addRow(fila);
-		
-
 		
 	}
 	

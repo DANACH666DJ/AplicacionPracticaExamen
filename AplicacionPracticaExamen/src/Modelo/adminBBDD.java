@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import Controlador.C_Login;
 import Controlador.C_Principal;
 import Controlador.C_Descatalogados;
+import Controlador.C_RegistroUsuario;
 
 public class adminBBDD {
 	private Connection conexion;
@@ -22,6 +23,7 @@ public class adminBBDD {
 	public C_Login cLogin;
 	public C_Principal cPrincipal;
 	public C_Descatalogados cDescatalogados;
+	public C_RegistroUsuario cRegistroUsuario;
 	
 	
 	public adminBBDD(){
@@ -116,6 +118,40 @@ public class adminBBDD {
 			}
 
 		}
+		//Tabla Usuarios
+		public void insertarTablaUsuarios() {
+			try {
+				Statement stmt;
+				if (conexion != null) {
+					stmt = conexion.createStatement();
+					ResultSet rset = stmt
+							.executeQuery("Select * From usuario ; ");
+					while (rset.next()) {
+						String usuario = rset.getString("Usuario");
+						String email = rset.getString("email");
+						String nombre = rset.getString("Nombre");
+						String apellidos = rset.getString("Apellidos");
+						String tipoUsuario = rset.getString("TipoUsuario");
+						
+						
+
+						cRegistroUsuario.introducirTablaUsuarios(usuario, email, nombre,
+								apellidos, tipoUsuario);
+					}
+					stmt.close();
+					rset.close();
+				} else {
+					System.out.println("conexion Nula");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+			
+		
+		
 		
 		//Tabla Descatalogados
 		public void insertarTablaDescatalogados(){
@@ -160,6 +196,9 @@ public class adminBBDD {
 	}
 	public void setCDescatalogados(C_Descatalogados cDescatalogados){
 		this.cDescatalogados = cDescatalogados;
+	}
+	public void setCRegistroUsuario(C_RegistroUsuario cRegistroUsuario){
+		this.cRegistroUsuario = cRegistroUsuario;
 	}
 	
 

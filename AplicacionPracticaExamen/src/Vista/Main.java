@@ -3,6 +3,7 @@ package Vista;
 import Controlador.C_Descatalogados;
 import Controlador.C_Login;
 import Controlador.C_Principal;
+import Controlador.C_RegistroUsuario;
 import Modelo.adminBBDD;
 
 public class Main {
@@ -14,11 +15,13 @@ public class Main {
 		V_Login vLogin;
 		V_Principal vPrincipal;
 		V_Descatalogados vDescatalogados;
+		V_RegistroUsuario vRegistroUsuario;
 		
 		// CONTROLADORES INICIO
 	    C_Login cLogin;
 		C_Principal cPrincipal;
 		C_Descatalogados cDescatalogados;
+		C_RegistroUsuario cRegistroUsuario;
 		
 		// MODELO INICIO
 		adminBBDD bbdda;
@@ -33,6 +36,8 @@ public class Main {
 			cPrincipal = new C_Principal();
 			vDescatalogados=new V_Descatalogados();
 			cDescatalogados=new C_Descatalogados();
+			vRegistroUsuario=new V_RegistroUsuario();
+			cRegistroUsuario=new C_RegistroUsuario();
 			
 			
 			
@@ -50,12 +55,22 @@ public class Main {
 			vPrincipal.setCPrincipal(cPrincipal);
 			vPrincipal.setLogin(vLogin);
 			vPrincipal.setDescatalogados(vDescatalogados);
+			vPrincipal.setvRegistroUsuario(vRegistroUsuario);
 			
 			vDescatalogados.setPrincipal(vPrincipal);
 			vDescatalogados.setCDescatalogados(cDescatalogados);
+			vDescatalogados.setvRegistroUsuario(vRegistroUsuario);
 			cDescatalogados.setvDescatalogados(vDescatalogados);
 			cDescatalogados.setBbdda(bbdda);
 			bbdda.setCDescatalogados(cDescatalogados);
+			
+			
+			vRegistroUsuario.setvPrincipal(vPrincipal);
+			vRegistroUsuario.setcRegistroUsuario(cRegistroUsuario);
+			vRegistroUsuario.setvDescatalogados(vDescatalogados);
+			cRegistroUsuario.setvRegistroUsuario(vRegistroUsuario);
+			cRegistroUsuario.setBbdda(bbdda);
+			bbdda.setCRegistroUsuario(cRegistroUsuario);
 			
 			
 			vLogin.setVisible(true);
@@ -64,6 +79,7 @@ public class Main {
 			//Introducción de tablas
 			bbdda.insertarTabla();
 			bbdda.insertarTablaDescatalogados();
+			bbdda.insertarTablaUsuarios();
 			
 			
 			
