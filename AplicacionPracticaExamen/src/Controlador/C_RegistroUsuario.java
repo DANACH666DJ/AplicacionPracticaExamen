@@ -23,6 +23,23 @@ public class C_RegistroUsuario {
 		
 		
 	}
+
+	public void eliminarUsuario(String email) {
+		// TODO Auto-generated method stub
+		bbdda.eliminarUsuario(email);
+		
+	}
+
+	public void actualizarTablaUsuarios() {
+		// TODO Auto-generated method stub
+		vRegistroUsuario.actualizarTablaUsuario();
+		
+	}
+
+	public void actualizarTabla() {
+		// TODO Auto-generated method stub
+		bbdda.insertarTablaUsuarios();
+	}
 	
 	
 	

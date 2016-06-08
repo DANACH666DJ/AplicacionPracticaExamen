@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
@@ -30,6 +31,13 @@ public class V_RegistroUsuario extends JFrame {
 	private V_Principal vPrincipal;
 	private DefaultTableModel dtm;
 	private V_Descatalogados vDescatalogados;
+	private JButton btnAltaUsuario;
+	private JButton btnModificar;
+	private JButton btnPrincipal;
+	private JButton btnDescatalogados;
+	private JButton btnPrestamos;
+	private JButton btnLog;
+	private JButton btnEliminar;
 	
 	
 	
@@ -52,7 +60,7 @@ public class V_RegistroUsuario extends JFrame {
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		
-		JButton btnPrincipal = new JButton("Principal");
+		btnPrincipal = new JButton("Principal");
 		btnPrincipal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
@@ -60,28 +68,61 @@ public class V_RegistroUsuario extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton = new JButton("Descatalogados");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnDescatalogados = new JButton("Descatalogados");
+		btnDescatalogados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				vDescatalogados.setVisible(true);
 			}
 		});
 		
-		JButton btnPrestamos = new JButton("Prestamos");
+		btnPrestamos = new JButton("Prestamos");
 		
-		JButton btnLog = new JButton("Log");
+		btnLog = new JButton("Log");
 		
 		txtUsuarios = new JTextField();
 		txtUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuarios.setText("Usuarios");
 		txtUsuarios.setColumns(10);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		
-		JButton btnNewButton_1 = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (btnEliminar.isFocusable()) {
+					int eleccion = JOptionPane.showConfirmDialog(null,
+							"¿Desea eliminar el usuario?", "Aviso",
+							JOptionPane.YES_NO_OPTION);
+					if (eleccion == JOptionPane.YES_OPTION) {
+						String email = "";
+						email = table.getValueAt(
+								table.getSelectedRow(), 0)
+								+ "";
+						cRegistroUsuario.eliminarUsuario(email);
+						
+						JOptionPane.showMessageDialog(null,
+								"El usuario se ha eliminado.", "Confirmación",
+								JOptionPane.YES_NO_CANCEL_OPTION);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"El usuario no se ha eliminado.",
+								"Confirmación",
+								JOptionPane.YES_NO_CANCEL_OPTION);
+						table.clearSelection();
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
+					}
+				}
+				
+			}
+		});
 		
-		JButton btnNewButton_2 = new JButton("Alta Nuevo Usuario");
+		btnAltaUsuario = new JButton("Alta Nuevo Usuario");
+		btnAltaUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -104,7 +145,7 @@ public class V_RegistroUsuario extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnPrincipal, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnDescatalogados, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
 							.addGap(13)
 							.addComponent(btnPrestamos, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
@@ -114,9 +155,9 @@ public class V_RegistroUsuario extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnModificar, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnAltaUsuario, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE))))
+							.addComponent(btnEliminar, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -124,7 +165,7 @@ public class V_RegistroUsuario extends JFrame {
 					.addGap(6)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnPrincipal)
-						.addComponent(btnNewButton)
+						.addComponent(btnDescatalogados)
 						.addComponent(btnPrestamos)
 						.addComponent(btnLog))
 					.addGap(66)
@@ -134,8 +175,8 @@ public class V_RegistroUsuario extends JFrame {
 					.addGap(10)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnModificar)
-						.addComponent(btnNewButton_2)
-						.addComponent(btnNewButton_1)))
+						.addComponent(btnAltaUsuario)
+						.addComponent(btnEliminar)))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -151,7 +192,13 @@ public class V_RegistroUsuario extends JFrame {
 	public void setvDescatalogados(V_Descatalogados vDescatalogados) {
 		this.vDescatalogados = vDescatalogados;
 	}
-	
+	public void actualizarTablaUsuario() {
+		dtm = new DefaultTableModel(new Object[][] {}, new String[] {
+				"Usuario", "email", "Nombre", "Apellidos", "TipoUsuario" });
+		table.setModel(dtm);
+		cRegistroUsuario.actualizarTabla();
+		
+	}
 
 	public void introducirTablaUsuarios(String usuario, String email,
 			String nombre, String apellidos, String tipoUsuario) {
@@ -166,5 +213,7 @@ public class V_RegistroUsuario extends JFrame {
 		((DefaultTableModel) table.getModel()).addRow(fila);
 		
 	}
+
+	
 
 }

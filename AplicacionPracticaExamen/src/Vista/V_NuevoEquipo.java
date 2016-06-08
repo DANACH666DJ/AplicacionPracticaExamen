@@ -312,6 +312,16 @@ public class V_NuevoEquipo extends JFrame {
 		textModelProcec.setColumns(10);
 		textModelProcec.setBounds(272, 314, 70, 20);
 		panel.add(textModelProcec);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				vPrincipal.setVisible(true);
+			}
+		});
+		btnVolver.setBounds(69, 510, 89, 23);
+		contentPane.add(btnVolver);
 	}
 
 	public void setcNuevoEquipo(C_NuevoEquipo cNuevoEquipo) {

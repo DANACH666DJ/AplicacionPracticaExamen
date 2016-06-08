@@ -221,6 +221,99 @@ public class adminBBDD {
 			
 			
 		}
+		
+		public void insertarNuevoEquipoPortatil(String codigoEquipo,
+				String resolPort, String pulgPort, String SSOO, String capacDisc,
+				String tipoDisc, String ramVel, String capacRam, String velGraf,
+				String marcGraf, String modelGraf, String velProces,
+				String marcProces, String modelProces) {
+			
+			try {
+				if (conexion != null) {
+					String query = "INSERT INTO `mydb`.`portatil` (`codigoEquipo`, `resolucion`, `pulgadas`, `ssoo`, `discoDuroCapacidad`, `discoDuroTipo`, `ramVelocidad`, `ramCapacidad`, `graficaVelocidad`, `graficaMarca`, `graficaModelo`, `procesadorVelocidad`, `procesadorMarca`, `procesadorModelo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					;
+					PreparedStatement pstmt = conexion.prepareStatement(query);
+					pstmt.setString(1, codigoEquipo);
+					pstmt.setString(2, resolPort);
+					pstmt.setString(3, pulgPort);
+					pstmt.setString(4, SSOO);
+					pstmt.setString(5, capacDisc);
+					pstmt.setString(6, tipoDisc);
+					pstmt.setString(7, ramVel);
+					pstmt.setString(8, capacRam);
+					pstmt.setString(9, velGraf);
+					pstmt.setString(10, marcGraf);
+					pstmt.setString(11, modelGraf);
+					pstmt.setString(12, velProces);
+					pstmt.setString(13, marcProces);
+					pstmt.setString(14, modelProces);
+					pstmt.executeUpdate();
+
+					pstmt.close();
+					System.out.println("Insercion Especificas Correcta");
+				} else {
+					System.out.println("conexion nula");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		public void eliminarEquipo(int codigoEquipo) {
+			try {
+				if (conexion != null) {
+					String queryUpdate = "UPDATE `mydb`.`equipos` SET `estado`='Descatalogado' WHERE `codigoEquipo`= ?;";
+					PreparedStatement pstmt = conexion
+							.prepareStatement(queryUpdate);
+					pstmt.setInt(1, codigoEquipo);
+					pstmt.executeUpdate();
+					pstmt.close();
+					String queryInsert = "INSERT INTO `mydb`.`bajaequipos` (`codigoEquipo`, `fechaBaja`, `horaBaja`) VALUES (?, curdate(), curtime());";
+					PreparedStatement pstmtInsert = conexion
+							.prepareStatement(queryInsert);
+					pstmtInsert.setInt(1, codigoEquipo);
+					pstmtInsert.executeUpdate();
+					pstmtInsert.close();
+					
+					System.out.println("Eliminacion Correcta");
+				} else {
+					System.out.println("conexion nula");
+				}
+
+				cDescatalogados.actualizarTabla();
+				
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		public void eliminarUsuario(String email) {
+			try {
+				if (conexion != null) {
+					String queryUpdate = "DELETE FROM `mydb`.`usuario` WHERE `email`='"+email+"';";
+					PreparedStatement pstmt = conexion
+							.prepareStatement(queryUpdate);
+					
+					pstmt.executeUpdate();
+					pstmt.close();
+
+					System.out.println("Eliminacion Correcta");
+				} else {
+					System.out.println("conexion nula");
+				}
+
+				cRegistroUsuario.actualizarTablaUsuarios();
+				
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
 	
 	public void salir() {
 		System.exit(0);
@@ -246,46 +339,7 @@ public class adminBBDD {
 		this.cNuevoEquipo = cNuevoEquipo;
 	}
 
-	public void insertarNuevoEquipoPortatil(String codigoEquipo,
-			String resolPort, String pulgPort, String SSOO, String capacDisc,
-			String tipoDisc, String ramVel, String capacRam, String velGraf,
-			String marcGraf, String modelGraf, String velProces,
-			String marcProces, String modelProces) {
-		
-		try {
-			if (conexion != null) {
-				String query = "INSERT INTO `mydb`.`portatil` (`codigoEquipo`, `resolucion`, `pulgadas`, `ssoo`, `discoDuroCapacidad`, `discoDuroTipo`, `ramVelocidad`, `ramCapacidad`, `graficaVelocidad`, `graficaMarca`, `graficaModelo`, `procesadorVelocidad`, `procesadorMarca`, `procesadorModelo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				;
-				PreparedStatement pstmt = conexion.prepareStatement(query);
-				pstmt.setString(1, codigoEquipo);
-				pstmt.setString(2, resolPort);
-				pstmt.setString(3, pulgPort);
-				pstmt.setString(4, SSOO);
-				pstmt.setString(5, capacDisc);
-				pstmt.setString(6, tipoDisc);
-				pstmt.setString(7, ramVel);
-				pstmt.setString(8, capacRam);
-				pstmt.setString(9, velGraf);
-				pstmt.setString(10, marcGraf);
-				pstmt.setString(11, modelGraf);
-				pstmt.setString(12, velProces);
-				pstmt.setString(13, marcProces);
-				pstmt.setString(14, modelProces);
-				pstmt.executeUpdate();
-
-				pstmt.close();
-				System.out.println("Insercion Especificas Correcta");
-			} else {
-				System.out.println("conexion nula");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-	}
+	
 
 	
 		

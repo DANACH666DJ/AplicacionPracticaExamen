@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -112,8 +113,42 @@ public class V_Principal extends JFrame {
 		});
 		
 		btnModifEquip = new JButton("Modificar Equipo");
+		btnModifEquip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		btnEliminEquip = new JButton("Eliminar Equipo");
+		btnEliminEquip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (btnEliminEquip.isFocusable()) {
+					int eleccion = JOptionPane.showConfirmDialog(null,
+							"¿Desea eliminar el equipo?", "Aviso",
+							JOptionPane.YES_NO_OPTION);
+					if (eleccion == JOptionPane.YES_OPTION) {
+						int codigoEquipo = 0;
+						codigoEquipo = Integer.parseInt(table.getValueAt(
+								table.getSelectedRow(), 0) + "");
+						cPrincipal.eliminarEquipo(codigoEquipo);
+						dtm = new DefaultTableModel(new Object[][] {},
+								new String[] { "IdEquipo", "Tipo", "Marca",
+										"Modelo", "Departamento", "TipoUso",
+										"Prestable", "Estado" });
+						table.setModel(dtm);
+						cPrincipal.actualizarTabla();
+
+						JOptionPane.showMessageDialog(null,
+								" Equipo Eliminado correctamente ",
+								"Confirmación",
+								JOptionPane.YES_NO_CANCEL_OPTION);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"El equipo no se ha eliminado", "Confirmación",
+								JOptionPane.YES_NO_CANCEL_OPTION);
+					}
+				}
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -233,6 +268,15 @@ public class V_Principal extends JFrame {
 	public void setvNuevoEquipo(V_NuevoEquipo vNuevoEquipo) {
 		this.vNuevoEquipo = vNuevoEquipo;
 	}
+	public void actualizarTablaPrincipal() {
+		// TODO Auto-generated method stub
+		dtm = new DefaultTableModel(new Object[][] {}, new String[] {
+				"IdEquipo", "Tipo", "Marca", "Modelo", "Departamento",
+				"TipoUso", "Prestable", "Estado" });
+		table.setModel(dtm);
+		cPrincipal.actualizarTabla();
+		
+	}
 	
 	public void IntroducirTablaPrincipal(int codigoEquipo, String tipo, String marca,
 			String modelo, String departamento, String tipoUso,
@@ -250,15 +294,7 @@ public class V_Principal extends JFrame {
 		((DefaultTableModel) table.getModel()).addRow(fila);
 		
 	}
-	public void actualizarTablaPrincipal() {
-		// TODO Auto-generated method stub
-		dtm = new DefaultTableModel(new Object[][] {}, new String[] {
-				"IdEquipo", "Tipo", "Marca", "Modelo", "Departamento",
-				"TipoUso", "Prestable", "Estado" });
-		table.setModel(dtm);
-		cPrincipal.actualizarTabla();
-		
-	}
+	
 	
 
 }

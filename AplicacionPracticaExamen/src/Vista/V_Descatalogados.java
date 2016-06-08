@@ -135,6 +135,15 @@ public class V_Descatalogados extends JFrame {
 		((DefaultTableModel) table.getModel()).addRow(fila);
 		
 	}
+	public void actualizarTabla() {
+		// TODO Auto-generated method stub
+		dtm = new DefaultTableModel(new Object[][] {}, new String[] {
+				"IdEquipo", "Equipo", "Marca", "Modelo", "Fecha de Baja",
+				"Hora de Baja" });
+		table.setModel(dtm);
+		cDescatalogados.actualizarTablaDescatalogados();
+		
+	}
 	
 	
 	

@@ -20,6 +20,19 @@ public class C_Descatalogados {
 		vDescatalogados.introducirTablaDescatalogados(codigoEquipo,tipo,marca,modelo,fechaBaja,horaBaja);
 		
 	}
+
+	public void actualizarTabla() {
+		vDescatalogados.actualizarTabla();
+		
+		
+		
+	}
+
+	public void actualizarTablaDescatalogados() {
+		// TODO Auto-generated method stub
+		bbdda.insertarTablaDescatalogados();
+		
+	}
 	
 
 }

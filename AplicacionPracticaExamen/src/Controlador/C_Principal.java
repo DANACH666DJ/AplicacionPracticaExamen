@@ -40,6 +40,14 @@ public class C_Principal {
 		
 	}
 
+	public void eliminarEquipo(int codigoEquipo) {
+		// TODO Auto-generated method stub
+		bbdda.eliminarEquipo(codigoEquipo);
+			
+		}
+		
+	}
+
 	
 
-}
+
