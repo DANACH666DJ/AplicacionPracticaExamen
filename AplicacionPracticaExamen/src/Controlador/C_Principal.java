@@ -27,6 +27,19 @@ public class C_Principal {
 		
 	}
 
+	public void actualizarTablaPrincipal() {
+		// TODO Auto-generated method stub
+		vPrincipal.actualizarTablaPrincipal();
+		
+		
+	}
+
+	public void actualizarTabla() {
+		// TODO Auto-generated method stub
+		bbdda.insertarTabla();
+		
+	}
+
 	
 
 }

@@ -16,6 +16,7 @@ import Controlador.C_Login;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -26,6 +27,7 @@ public class V_Descatalogados extends JFrame {
 	private V_Principal vPrincipal;
 	private DefaultTableModel dtm;
 	private V_RegistroUsuario vRegistroUsuario;
+	
 	
 	
 	public C_Descatalogados cDescatalogados;
@@ -118,6 +120,7 @@ public class V_Descatalogados extends JFrame {
 	public void setvRegistroUsuario(V_RegistroUsuario vRegistroUsuario) {
 		this.vRegistroUsuario = vRegistroUsuario;
 	}
+	
 	public void introducirTablaDescatalogados(int codigoEquipo, String tipo,
 			String marca, String modelo, String fechaBaja, String horaBaja) {
 		// TODO Auto-generated method stub
@@ -132,6 +135,7 @@ public class V_Descatalogados extends JFrame {
 		((DefaultTableModel) table.getModel()).addRow(fila);
 		
 	}
+	
 	
 	
 }

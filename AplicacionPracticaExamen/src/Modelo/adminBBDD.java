@@ -10,6 +10,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 import Controlador.C_Login;
+import Controlador.C_NuevoEquipo;
 import Controlador.C_Principal;
 import Controlador.C_Descatalogados;
 import Controlador.C_RegistroUsuario;
@@ -24,6 +25,7 @@ public class adminBBDD {
 	public C_Principal cPrincipal;
 	public C_Descatalogados cDescatalogados;
 	public C_RegistroUsuario cRegistroUsuario;
+	public C_NuevoEquipo cNuevoEquipo;
 	
 	
 	public adminBBDD(){
@@ -180,6 +182,45 @@ public class adminBBDD {
 			}
 			
 		}
+		public void insertarNuevoEquipo(String idEquipo, String tipo, String marca,
+				String prestable, String modelo, String departamento,
+				String tipoUso, String estado) {
+			
+			try {
+				if (conexion != null) {
+					String query = "INSERT INTO `mydb`.`equipos` (`codigoEquipo`, `tipo`, `marca`, `prestable`, `modelo`, `departamento`, `tipoUso`, `estado`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+					PreparedStatement pstmt = conexion.prepareStatement(query);
+					pstmt.setString(1, idEquipo);
+					pstmt.setString(2, tipo);
+					pstmt.setString(3, marca);
+					pstmt.setString(4, modelo);
+					pstmt.setString(5, departamento);
+					pstmt.setString(6, tipoUso);
+					pstmt.setString(7, prestable);
+					pstmt.setString(8, estado);
+					pstmt.executeUpdate();
+					if (tipo.equals("Portatil")) {
+						cNuevoEquipo.insertarPortatil();
+						JOptionPane.showMessageDialog(null,
+								"Nuevo Portátil Introducido");
+					} 
+					pstmt.close();
+					
+
+					System.out.println("Insercion Comunes Correcta");
+				} else {
+					System.out.println("conexion nula");
+				}
+
+				cPrincipal.actualizarTablaPrincipal();
+				
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
 	
 	public void salir() {
 		System.exit(0);
@@ -200,9 +241,53 @@ public class adminBBDD {
 	public void setCRegistroUsuario(C_RegistroUsuario cRegistroUsuario){
 		this.cRegistroUsuario = cRegistroUsuario;
 	}
-	
 
+	public void setcNuevoEquipo(C_NuevoEquipo cNuevoEquipo) {
+		this.cNuevoEquipo = cNuevoEquipo;
+	}
+
+	public void insertarNuevoEquipoPortatil(String codigoEquipo,
+			String resolPort, String pulgPort, String SSOO, String capacDisc,
+			String tipoDisc, String ramVel, String capacRam, String velGraf,
+			String marcGraf, String modelGraf, String velProces,
+			String marcProces, String modelProces) {
 		
+		try {
+			if (conexion != null) {
+				String query = "INSERT INTO `mydb`.`portatil` (`codigoEquipo`, `resolucion`, `pulgadas`, `ssoo`, `discoDuroCapacidad`, `discoDuroTipo`, `ramVelocidad`, `ramCapacidad`, `graficaVelocidad`, `graficaMarca`, `graficaModelo`, `procesadorVelocidad`, `procesadorMarca`, `procesadorModelo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				;
+				PreparedStatement pstmt = conexion.prepareStatement(query);
+				pstmt.setString(1, codigoEquipo);
+				pstmt.setString(2, resolPort);
+				pstmt.setString(3, pulgPort);
+				pstmt.setString(4, SSOO);
+				pstmt.setString(5, capacDisc);
+				pstmt.setString(6, tipoDisc);
+				pstmt.setString(7, ramVel);
+				pstmt.setString(8, capacRam);
+				pstmt.setString(9, velGraf);
+				pstmt.setString(10, marcGraf);
+				pstmt.setString(11, modelGraf);
+				pstmt.setString(12, velProces);
+				pstmt.setString(13, marcProces);
+				pstmt.setString(14, modelProces);
+				pstmt.executeUpdate();
+
+				pstmt.close();
+				System.out.println("Insercion Especificas Correcta");
+			} else {
+				System.out.println("conexion nula");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+
+	
 		
 		
 	}

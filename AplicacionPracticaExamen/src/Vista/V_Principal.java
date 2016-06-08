@@ -40,6 +40,7 @@ public class V_Principal extends JFrame {
 	private V_Descatalogados vDescatalogados;
 	private DefaultTableModel dtm;
 	private V_RegistroUsuario vRegistroUsuario;
+	private V_NuevoEquipo vNuevoEquipo;
 	
 	public C_Principal cPrincipal;
 	public adminBBDD bbdda;
@@ -104,6 +105,11 @@ public class V_Principal extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		btnNuevoEquip = new JButton("Nuevo Equipo");
+		btnNuevoEquip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vNuevoEquipo.setVisible(true);
+			}
+		});
 		
 		btnModifEquip = new JButton("Modificar Equipo");
 		
@@ -224,6 +230,10 @@ public class V_Principal extends JFrame {
 	public void setvRegistroUsuario(V_RegistroUsuario vRegistroUsuario) {
 		this.vRegistroUsuario = vRegistroUsuario;
 	}
+	public void setvNuevoEquipo(V_NuevoEquipo vNuevoEquipo) {
+		this.vNuevoEquipo = vNuevoEquipo;
+	}
+	
 	public void IntroducirTablaPrincipal(int codigoEquipo, String tipo, String marca,
 			String modelo, String departamento, String tipoUso,
 			String prestable, String estado){
@@ -238,6 +248,15 @@ public class V_Principal extends JFrame {
 		fila[6] = prestable;
 		fila[7] = estado;
 		((DefaultTableModel) table.getModel()).addRow(fila);
+		
+	}
+	public void actualizarTablaPrincipal() {
+		// TODO Auto-generated method stub
+		dtm = new DefaultTableModel(new Object[][] {}, new String[] {
+				"IdEquipo", "Tipo", "Marca", "Modelo", "Departamento",
+				"TipoUso", "Prestable", "Estado" });
+		table.setModel(dtm);
+		cPrincipal.actualizarTabla();
 		
 	}
 	

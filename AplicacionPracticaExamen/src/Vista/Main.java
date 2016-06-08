@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.C_Descatalogados;
 import Controlador.C_Login;
+import Controlador.C_NuevoEquipo;
 import Controlador.C_Principal;
 import Controlador.C_RegistroUsuario;
 import Modelo.adminBBDD;
@@ -16,12 +17,14 @@ public class Main {
 		V_Principal vPrincipal;
 		V_Descatalogados vDescatalogados;
 		V_RegistroUsuario vRegistroUsuario;
+		V_NuevoEquipo vNuevoEquipo;
 		
 		// CONTROLADORES INICIO
 	    C_Login cLogin;
 		C_Principal cPrincipal;
 		C_Descatalogados cDescatalogados;
 		C_RegistroUsuario cRegistroUsuario;
+		C_NuevoEquipo cNuevoEquipo;
 		
 		// MODELO INICIO
 		adminBBDD bbdda;
@@ -38,6 +41,8 @@ public class Main {
 			cDescatalogados=new C_Descatalogados();
 			vRegistroUsuario=new V_RegistroUsuario();
 			cRegistroUsuario=new C_RegistroUsuario();
+			vNuevoEquipo=new V_NuevoEquipo();
+			cNuevoEquipo=new C_NuevoEquipo();
 			
 			
 			
@@ -56,6 +61,7 @@ public class Main {
 			vPrincipal.setLogin(vLogin);
 			vPrincipal.setDescatalogados(vDescatalogados);
 			vPrincipal.setvRegistroUsuario(vRegistroUsuario);
+			vPrincipal.setvNuevoEquipo(vNuevoEquipo);
 			
 			vDescatalogados.setPrincipal(vPrincipal);
 			vDescatalogados.setCDescatalogados(cDescatalogados);
@@ -71,6 +77,12 @@ public class Main {
 			cRegistroUsuario.setvRegistroUsuario(vRegistroUsuario);
 			cRegistroUsuario.setBbdda(bbdda);
 			bbdda.setCRegistroUsuario(cRegistroUsuario);
+			
+			vNuevoEquipo.setvPrincipal(vPrincipal);
+			vNuevoEquipo.setcNuevoEquipo(cNuevoEquipo);
+			cNuevoEquipo.setBbdda(bbdda);
+			cNuevoEquipo.setvNuevoEquipo(vNuevoEquipo);
+			bbdda.setcNuevoEquipo(cNuevoEquipo);
 			
 			
 			vLogin.setVisible(true);

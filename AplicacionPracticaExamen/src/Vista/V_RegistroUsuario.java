@@ -31,11 +31,14 @@ public class V_RegistroUsuario extends JFrame {
 	private DefaultTableModel dtm;
 	private V_Descatalogados vDescatalogados;
 	
+	
+	
 
 	/**
 	 * Launch the application.
 	 */
 	
+
 
 	/**
 	 * Create the frame.
@@ -148,6 +151,7 @@ public class V_RegistroUsuario extends JFrame {
 	public void setvDescatalogados(V_Descatalogados vDescatalogados) {
 		this.vDescatalogados = vDescatalogados;
 	}
+	
 
 	public void introducirTablaUsuarios(String usuario, String email,
 			String nombre, String apellidos, String tipoUsuario) {
